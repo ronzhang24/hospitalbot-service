@@ -20,5 +20,5 @@ ENV GOOGLE_APPLICATION_CREDENTIALS="/app/service-account.json"
 # Expose port 8080 for Cloud Run
 EXPOSE 8080
 
-# Command to run the application
-CMD ["python", "main.py"]
+# ✅ Use gunicorn to run the app properly on Cloud Run
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:8080"]
