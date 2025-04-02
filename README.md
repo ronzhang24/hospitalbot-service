@@ -17,12 +17,4 @@ The chatbot is responsible for engaging users in interactive, multi-turn convers
 (2) Machine Learning Classification Model 
 This model is trained on structured medical data, such as disease descriptions extracted from medical books and symptom-disease mappings obtained from validated datasets. Once the chatbot gathers sufficient information, the model processes the inputs to predict the most likely disease and suggest the corresponding medical department.  
 
-By integrating DialogFlow with a domain-adapted machine learning model, the system aims to: 
 
-• Collect patient symptoms through natural language interactions 
-
-• Perform preliminary analysis to suggest possible medical conditions 
-
-• Recommend the most relevant hospital department based on the predicted disease
-
-• Reduce patient uncertainty and improve the efficiency of hospital visits 
