@@ -1,6 +1,3 @@
-# 不上传密钥文件到 GitHub
-hospitalbot-service-key.json
-
 # Python 临时文件
 __pycache__/
 *.pyc
