@@ -3,4 +3,5 @@ __pycache__/
 *.pyc
 
 # Mac 系统文件
-.DS_Store
+.DS_Storeservice-account.json
+service-account.json
