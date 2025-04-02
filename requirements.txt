@@ -1,0 +1,12 @@
+flask
+joblib
+numpy
+pandas
+nltk
+scipy
+scikit-learn
+google-cloud-dialogflow
+google-cloud-bigquery
+rdflib
+gunicorn
+
