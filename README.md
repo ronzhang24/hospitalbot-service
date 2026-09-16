@@ -1,20 +1,45 @@
-1. Introduction 
+# Hospital Symptom-to-Disease Prediction Bot
 
-1.1 Problem Formulation  
-Define the problem, why it matters, and how chatbots improve healthcare navigation. 
-In the healthcare industry, timely and accurate diagnosis is critical for effective treatment. However, many patients struggle to determine which medical department they should visit based on their symptoms. This often results in unnecessary visits to the wrong department, leading to inefficiencies, increased waiting times, and additional costs for both patients and healthcare providers. 
-Medical chatbots combined with machine learning have emerged as a potential solution to streamline the healthcare navigation process. A symptom-checking chatbot can engage in conversations with patients, systematically collecting symptoms and providing preliminary assessments. By analyzing patient responses, the chatbot can suggest potential medical conditions and direct them to the most relevant hospital department. This not only improves the triage process but also enhances patient experience and optimizes hospital resource utilization. 
-However, implementing such systems in practice presents several challenges, particularly in understanding user input and generating accurate medical suggestions. During medical consultations, users often describe their symptoms in natural language and expect accurate diagnoses or meaningful medical advice in return. Traditional rule-based dialogue systems struggle to interpret complex, domain-specific inputs, while large language models (LLMs), although powerful, are prone to hallucinations that may lead to misdiagnoses. 
+Dialogflow chatbot that takes a symptom description in natural language and returns a predicted diagnosis, served through a Flask webhook on Google Cloud Run.
 
-2 Objective of the project  
-Outline the goal of your chatbot, such as guiding patients to the correct hospital department, improve triage process 
-The primary objective of this project is to design and implement an intelligent chatbot-based healthcare guidance system that assists patients in identifying potential health conditions and recommending the appropriate hospital department for consultation. By reducing uncertainty in self-assessment and improving the triage process, the system aims to enhance patient experience and optimize hospital resource allocation. 
-The proposed solution consists of two main components: 
+## Demo
 
-(1) DialogFlow-based Chatbot 
-The chatbot is responsible for engaging users in interactive, multi-turn conversations to collect relevant information, including symptoms, family medical history, age, gender, and other contextual details. 
+A short demo video is in [`demo/`](demo/) — download to watch it play.
 
-(2) Machine Learning Classification Model 
-This model is trained on structured medical data, such as disease descriptions extracted from medical books and symptom-disease mappings obtained from validated datasets. Once the chatbot gathers sufficient information, the model processes the inputs to predict the most likely disease and suggest the corresponding medical department.  
+## How it works
 
+1. A user describes symptoms to the Dialogflow agent.
+2. Dialogflow calls the Flask webhook (`main.py`), hosted on Cloud Run.
+3. The webhook runs the trained model (`disease_predictor.pkl`, loaded via `model.py`) and returns the predicted disease to the conversation.
 
+## Stack
+
+Python · Flask · NLTK (text preprocessing) · trained classifier (`disease_predictor.pkl`) · Docker · Google Cloud Run · Dialogflow ES
+
+## Deploy
+
+Requires your own `service-account.json` for Google Cloud credentials (not included in this repo).
+
+```bash
+cd ~/Documents/github/hospitalbot-service
+
+gcloud builds submit --tag gcr.io/hospitalbot-service-455602/hospitalbot-model .
+
+gcloud run deploy hospitalbot-service \
+  --image gcr.io/hospitalbot-service-455602/hospitalbot-model \
+  --region us-central1 \
+  --platform managed \
+  --allow-unauthenticated
+```
+
+## Files
+
+- `main.py` — Flask webhook entry point
+- `model.py` — loads and runs the trained model
+- `disease_predictor.pkl` — trained model artifact
+- `log.py` — logging
+- `Dockerfile` — container build for Cloud Run
+
+## Context
+
+Final project for Data Science Application (DTI 5125), University of Ottawa.
