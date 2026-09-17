@@ -20,7 +20,7 @@ Python · Flask · NLTK (text preprocessing) · scikit-learn (`SGDClassifier`) �
 
 ## Deploy
 
-Requires your own `service-account.json` for Google Cloud credentials (not included in this repo).
+Requires your own `service-account.json` for Google Cloud credentials (not included in this repo). Replace `hospitalbot-service-455602` below with your own GCP project ID.
 
 ```bash
 cd ~/Documents/github/hospitalbot-service
