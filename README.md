@@ -20,7 +20,12 @@ Python · Flask · NLTK (text preprocessing) · scikit-learn (`SGDClassifier`) �
 
 ## Deploy
 
-Requires your own `service-account.json` for Google Cloud credentials (not included in this repo). Replace `hospitalbot-service-455602` below with your own GCP project ID.
+Prerequisites:
+
+- `gcloud` CLI installed and authenticated (`gcloud auth login`), with your project set (`gcloud config set project <your-project-id>`) and the Cloud Build and Cloud Run APIs enabled (`gcloud services enable run.googleapis.com cloudbuild.googleapis.com`).
+- Your own `service-account.json` in the repo root, next to `Dockerfile` — Google Cloud credentials, not included in this repo.
+
+Replace `hospitalbot-service-455602` below with your own GCP project ID.
 
 ```bash
 cd ~/Documents/github/hospitalbot-service
@@ -33,6 +38,8 @@ gcloud run deploy hospitalbot-service \
   --platform managed \
   --allow-unauthenticated
 ```
+
+Copy the returned Cloud Run URL and set it (with `/default` appended) as the Fulfillment webhook in your own Dialogflow agent's console. The Dialogflow agent itself — intents, entities, conversation flow — isn't included in this repo; the webhook only returns a prediction once Dialogflow calls it in that shape.
 
 ## Files
 
@@ -54,8 +61,3 @@ The raw dataset isn't included in this repo, so these notebooks are for referenc
 ## Context
 
 Final project for Data Science Application (DTI 5125), University of Ottawa.
-
-Team members: Rang Zhang, Teewalee Asawaniwed, Jie Wang.
-
-- Programming: Rang Zhang, Teewalee Asawaniwed
-- Supporting tasks: Jie Wang
