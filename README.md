@@ -18,6 +18,8 @@ The model is trained on the Kaggle [Symptom2Disease](https://www.kaggle.com/data
 
 Python · Flask · NLTK (text preprocessing) · scikit-learn (`SGDClassifier`) · Docker · Google Cloud Run · Dialogflow ES
 
+NLTK data (`stopwords`, `punkt`) isn't committed to the repo -- the `Dockerfile` downloads it at build time. For local development without Docker, run `python -m nltk.downloader -d ./nltk_data stopwords punkt punkt_tab` first.
+
 ## Deploy
 
 Prerequisites:

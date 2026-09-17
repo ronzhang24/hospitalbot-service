@@ -11,6 +11,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application files
 COPY . .
 
+# Download the NLTK data actually used by model.py (stopwords, tokenizer) --
+# not committed to the repo, fetched fresh at build time instead.
+RUN python -m nltk.downloader -d ./nltk_data stopwords punkt punkt_tab
+
 # Copy the model file
 COPY disease_predictor.pkl ./disease_predictor.pkl
 
