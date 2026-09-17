@@ -60,4 +60,4 @@ The raw dataset isn't included in this repo, so these notebooks are for referenc
 
 ## Context
 
-Final project for Data Science Application (DTI 5125), University of Ottawa.
+Team project for Data Science Application (DTI 5125), University of Ottawa. Team members: Rang Zhang, Teewalee Asawaniwed, Jie Wang
