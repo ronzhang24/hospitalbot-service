@@ -10,11 +10,13 @@ A short demo video is in [`demo/`](demo/) — download to watch it play.
 
 1. A user describes symptoms to the Dialogflow agent.
 2. Dialogflow calls the Flask webhook (`main.py`), hosted on Cloud Run.
-3. The webhook runs the trained model (`disease_predictor.pkl`, loaded via `model.py`) and returns the predicted disease to the conversation.
+3. The webhook runs the trained model (`disease_predictor.pkl`, loaded via `model.py`) and returns the predicted disease along with a recommended hospital department.
+
+The model is trained on the Kaggle [Symptom2Disease](https://www.kaggle.com/datasets/niyarrbarman/symptom2disease) dataset, using TF-IDF and topic-model features with a scikit-learn classifier. The full training and model-selection process is in [`notebooks/`](notebooks/).
 
 ## Stack
 
-Python · Flask · NLTK (text preprocessing) · trained classifier (`disease_predictor.pkl`) · Docker · Google Cloud Run · Dialogflow ES
+Python · Flask · NLTK (text preprocessing) · scikit-learn (`SGDClassifier`) · Docker · Google Cloud Run · Dialogflow ES
 
 ## Deploy
 
@@ -39,6 +41,15 @@ gcloud run deploy hospitalbot-service \
 - `disease_predictor.pkl` — trained model artifact
 - `log.py` — logging
 - `Dockerfile` — container build for Cloud Run
+- `notebooks/` — training and analysis notebooks (see below)
+- `demo/` — demo video
+
+## Notebooks
+
+The raw dataset isn't included in this repo, so these notebooks are for reference rather than direct re-execution.
+
+- `group24_project_01_clustering.ipynb` — exploratory K-Means clustering on symptom/topic data, checking whether unsupervised clusters align with the disease and department labels (evaluated with Cohen's Kappa). Informs the feature choices below; not part of the deployed pipeline.
+- `group24_project_02_classification.ipynb` — the full classification pipeline: data preparation, TF-IDF/LDA feature engineering, model comparison (SGD, Logistic Regression, LinearSVC, Random Forest) across bag-of-words vs. TF-IDF, hyperparameter tuning, and export of the final `disease_predictor.pkl` used in `model.py`.
 
 ## Context
 
