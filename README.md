@@ -1,4 +1,4 @@
-# Hospital Symptom-to-Disease Prediction Bot
+# Chatbot-Based Triage System
 
 Dialogflow chatbot that takes a symptom description in natural language and returns a predicted diagnosis, served through a Flask webhook on Google Cloud Run.
 
